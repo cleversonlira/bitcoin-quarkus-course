@@ -21,6 +21,10 @@ public class Ordem {
 
 	@Column(name = "user_id")
 	private Long userId;
+	
+	public Long getUserId() {
+		return userId;
+	}
 
 	public void setPreco(Double preco) {
 		this.preco = preco;

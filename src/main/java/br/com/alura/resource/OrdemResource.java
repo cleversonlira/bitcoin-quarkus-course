@@ -11,31 +11,32 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.SecurityContext;
 
 import br.com.alura.model.Ordem;
 import br.com.alura.repository.OrdemRepository;
+import br.com.alura.service.OrdemService;
 
 @Path("/ordens")
 public class OrdemResource {
 
 	@Inject
-	OrdemRepository ordemRepository;
+	OrdemService ordemService;
 
 	@POST
 	@Transactional
-	@RolesAllowed("user")
+	@RolesAllowed("user")	
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void inserir(Ordem ordem) {
-		ordem.setData(LocalDate.now());
-		ordem.setStatus("ENVIADA");
-		ordemRepository.persist(ordem);
+	public void inserir(@Context SecurityContext context,Ordem ordem) {
+		ordemService.inserir(context, ordem);
 	}
 
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<Ordem> listar() {
-		return ordemRepository.listAll();
-	}
+//	@GET
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public List<Ordem> listar() {
+//		return ordemRepository.listAll();
+//	}
 
 }
