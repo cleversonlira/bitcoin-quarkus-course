@@ -3,6 +3,7 @@ package br.com.alura.resource;
 import java.util.List;
 
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
@@ -23,14 +24,14 @@ public class UsuarioResource {
 	
 	
 	@POST
-	@PermitAll
+	@RolesAllowed("admin")
 	@Transactional
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void inserir(Usuario usuario) {
-		Usuario.inserir(usuario);
+		Usuario.inserir(usuario);		
 	}
 	
-	@GET
+	@GET	
 	@PermitAll
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Usuario> listar() {

@@ -1,5 +1,6 @@
 package br.com.alura.model;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -47,6 +48,7 @@ public class Usuario extends PanacheEntityBase {
 		this.username = username;
 	}
 	
+	@JsonbTransient//nao enviar quando um usuario for recuperado
 	public String getPassword() {
 		return password;
 	}

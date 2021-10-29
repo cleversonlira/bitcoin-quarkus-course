@@ -33,10 +33,11 @@ public class OrdemResource {
 		ordemService.inserir(context, ordem);
 	}
 
-//	@GET
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public List<Ordem> listar() {
-//		return ordemRepository.listAll();
-//	}
+	@GET
+	@RolesAllowed("admin")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Ordem> listar() {
+		return ordemService.listar();
+	}
 
 }
